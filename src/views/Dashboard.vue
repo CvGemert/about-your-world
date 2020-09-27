@@ -11,7 +11,7 @@
             dense
             ><span @click="selectedHdi = hdi.key" class="pointer">
               <Indicators
-                :mainData="globalHdi(hdi.key)"
+                :mainData="filterHdi(hdi.key)"
                 :name="hdi.value"
                 :selectedHdi="selectedHdi"
               />
@@ -24,13 +24,13 @@
       <v-col cols="6" md="8" lg="9">
         <v-row no-gutters>
           <v-col cols="9">
-        <GridCard
-          title="comp.title"
-          toolbarIcon="calendar-clock"
-          toolbarColour="comp.toolbarColour"
-          contentClass="glass-card"
-        >
-          <!-- <template slot="detailSelection">
+            <GridCard
+              title="comp.title"
+              toolbarIcon="calendar-clock"
+              toolbarColour="comp.toolbarColour"
+              contentClass="glass-card"
+            >
+              <!-- <template slot="detailSelection">
             <v-select
               v-if="comp.selectionItems"
               dense
@@ -40,10 +40,10 @@
               :label="comp.title"
             />
           </template> -->
-          <template slot="body">
-            <ChartTime :mainData="globalHdi(selectedHdi)" />
-          </template>
-        </GridCard>
+              <template slot="body">
+                <ChartTime :mainData="filterHdi(selectedHdi)" />
+              </template>
+            </GridCard>
           </v-col>
         </v-row>
       </v-col>
@@ -60,6 +60,7 @@ import Indicators from "../components/Indicators";
 
 export default {
   name: "Home",
+  props: ["selectedCountry"],
   components: {
     ChartTime,
     GridCard,
@@ -75,31 +76,55 @@ export default {
     ...mapState("hdiModule", ["country_codes", "indicators", "hdiSelect"]),
   },
   methods: {
-    globalHdi(input) {
-      let dataSerie = [];
+    filterHdi(input) {
+      if (this.selectedCountry !== "global") {
+        let dataSerie = [];
 
-      let allValues = Object.values(this.mainHdi[input]);
-      let allYears = [...new Set(allValues.map((x) => Object.keys(x)).flat())];
+        Object.entries(this.mainHdi[input][this.selectedCountry]).map(
+          (year) => {
+            if (input === 141706) {
+              dataSerie.push([year[0], parseInt(year[1])]);
+            } else if (input === 137506) {
+              dataSerie.push([year[0], year[1].toFixed(3)]);
+            } else {
+              dataSerie.push([year[0], year[1].toFixed(2)]);
+            }
+          }
+        );
+        return [
+          {
+            name: input,
+            data: dataSerie,
+          },
+        ];
+      } else {
+        let dataSerie = [];
 
-      allYears.map((year) => {
-        let oneYear = Object.values(allValues)
-          .filter((elKey) => elKey[year])
-          .map((elVal) => elVal[year]);
+        let allValues = Object.values(this.mainHdi[input]);
+        let allYears = [
+          ...new Set(allValues.map((x) => Object.keys(x)).flat()),
+        ];
 
-        let unrounded =
-          oneYear.reduce((acc, cur) => parseFloat(acc) + parseFloat(cur), 0) /
-          oneYear.length;
+        allYears.map((year) => {
+          let oneYear = Object.values(allValues)
+            .filter((elKey) => elKey[year])
+            .map((elVal) => elVal[year]);
 
-        if (input === 141706) {
-          dataSerie.push([year, parseInt(unrounded)]);
-        } else if (input === 137506) {
-          dataSerie.push([year, unrounded.toFixed(3)]);
-        } else {
-          dataSerie.push([year, unrounded.toFixed(3)]);
-        }
-      });
+          let unrounded =
+            oneYear.reduce((acc, cur) => parseFloat(acc) + parseFloat(cur), 0) /
+            oneYear.length;
 
-      return [{ name: input, data: dataSerie }];
+          if (input === 141706) {
+            dataSerie.push([year, parseInt(unrounded)]);
+          } else if (input === 137506) {
+            dataSerie.push([year, unrounded.toFixed(3)]);
+          } else {
+            dataSerie.push([year, unrounded.toFixed(2)]);
+          }
+        });
+
+        return [{ name: input, data: dataSerie }];
+      }
     },
   },
 };
@@ -107,6 +132,6 @@ export default {
 
 <style lang="scss">
 .indicator-width {
-  min-width: 320px!important;
+  min-width: 320px !important;
 }
 </style>

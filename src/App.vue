@@ -80,10 +80,24 @@
       <v-spacer />
 
       <!-- Region select -->
-      <v-select :items="regionList" single-line placeholder="Select Region" class="mt-5 mr-4 appbar-select"/>
+      <v-select
+        :items="regionList"
+        single-line
+        placeholder="Select Region"
+        class="mt-5 mr-4 appbar-select"
+      />
 
-      <!-- Country select -->
-      <v-select :items="countryList" single-line placeholder="Select country" class="mt-5 appbar-select" />
+      <!-- Country selection -->
+      <v-select
+        :items="keyedCountries"
+        v-model="selectedCountry"
+        item-text="value"
+        item-value="key"
+        label="Select Country"
+        hide-details
+        outlined
+        dense
+      />
 
       <!-- TABS HEADERS -->
       <v-tabs v-model="tab" icons-and-text right class="app-tabs">
@@ -110,7 +124,7 @@
     <v-main class="content-wrap">
       <v-tabs-items v-model="tab" class="transparent">
         <v-tab-item id="dashboard-tab">
-          <Dashboard />
+          <Dashboard :selectedCountry="selectedCountry" />
         </v-tab-item>
         <v-tab-item id="advanced-tab">
           <Advanced />
@@ -121,6 +135,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 import Advanced from "./views/Advanced";
 import Dashboard from "./views/Dashboard";
 
@@ -138,11 +154,21 @@ export default {
       // Search & Selects
       search: "",
       regionList: [],
-      countryList: [],
+      selectedCountry: "global",
 
       // Loading States
       loading: true,
     };
+  },
+  computed: {
+    ...mapState("hdiModule", ["country_codes"]),
+
+    keyedCountries() {
+      return Object.entries(this.country_codes).map((x) => ({
+        key: x[0],
+        value: x[1],
+      }));
+    },
   },
 };
 </script>
@@ -195,7 +221,7 @@ html {
 }
 
 .app-tabs {
-  width: fit-content!important;
+  width: fit-content !important;
 }
 
 // Global reusable classes
