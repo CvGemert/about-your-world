@@ -1,4 +1,4 @@
-export default function mergeReduce() {
+export default function reduceFunctions() {
 
   // Basic reduce (sum)
   function reduceSum(input) {
