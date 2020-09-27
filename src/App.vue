@@ -197,4 +197,9 @@ html {
 .app-tabs {
   width: fit-content!important;
 }
+
+// Global reusable classes
+.pointer {
+  cursor: pointer;
+}
 </style>

@@ -3,7 +3,7 @@
     type="area"
     height="95%"
     :options="chartOptions"
-    :series="mainData"
+    :series="series"
   />
 </template>
 
@@ -11,6 +11,11 @@
 export default {
   name: "ChartTime",
   props: ['mainData'],
+  computed: {
+    series() {
+      return this.mainData
+    }
+  },
   data() {
     return {
       chartOptions: {
@@ -37,10 +42,6 @@ export default {
         },
         stroke: {
           curve: "smooth",
-        },
-        markers: {
-          size: 1,
-          style: "hollow",
         },
         xaxis: {
           type: "datetime",
