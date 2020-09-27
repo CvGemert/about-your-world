@@ -3,10 +3,9 @@
     <!-- ************************************ SIDE DRAWERS ************************************ -->
 
     <!-- Drawer left -->
-    <v-navigation-drawer app permanent clipped mini-variant>
-      <!-- <AppNavigation /> -->
+    <!-- <v-navigation-drawer app permanent clipped mini-variant>
       Placeholder
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
 
     <!-- Drawer right -->
     <v-navigation-drawer
@@ -66,7 +65,7 @@
       </v-toolbar-title>
 
       <!-- Spacing -->
-      <v-divider vertical inset light class="mx-6" />
+      <v-divider vertical inset class="mx-6" />
       <v-spacer />
 
       <!-- Search -->
@@ -81,43 +80,60 @@
       <v-spacer />
 
       <!-- Region select -->
-      <v-select :items="regionList" single-line placeholder="Select Region" />
+      <v-select :items="regionList" single-line placeholder="Select Region" class="mt-5 mr-4 appbar-select"/>
 
       <!-- Country select -->
-      <v-select :items="countryList" single-line placeholder="Select country" />
+      <v-select :items="countryList" single-line placeholder="Select country" class="mt-5 appbar-select" />
+
+      <!-- TABS HEADERS -->
+      <v-tabs v-model="tab" icons-and-text right class="app-tabs">
+        <v-tab href="#dashboard-tab">
+          dashboard
+          <v-icon>mdi-television-guide</v-icon>
+        </v-tab>
+
+        <v-tab href="#advanced-tab">
+          advanced
+          <v-icon>mdi-chart-bar-stacked</v-icon>
+        </v-tab>
+      </v-tabs>
 
       <!-- Right drawer toggle -->
-      <v-btn icon @click="rightDrawer = !rightDrawer">
+      <!-- <v-btn icon @click="rightDrawer = !rightDrawer">
         <v-badge content="i" color="primary" overlap>
           <v-icon large>mdi-apps</v-icon>
         </v-badge>
-      </v-btn>
+      </v-btn> -->
     </v-app-bar>
 
     <!-- ************************************ MAIN CONTENT ************************************ -->
     <v-main class="content-wrap">
-      <v-container fluid>
-        <v-row>
-          <v-col>
-            <HelloWorld />
-          </v-col>
-        </v-row>
-      </v-container>
+      <v-tabs-items v-model="tab" class="transparent">
+        <v-tab-item id="dashboard-tab">
+          <Dashboard />
+        </v-tab-item>
+        <v-tab-item id="advanced-tab">
+          <Advanced />
+        </v-tab-item>
+      </v-tabs-items>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+import Advanced from "./views/Advanced";
+import Dashboard from "./views/Dashboard";
 
 export default {
   components: {
-    HelloWorld,
+    Advanced,
+    Dashboard,
   },
   data() {
     return {
       // App & Layouts
       rightDrawer: false,
+      tab: "dashboard-tab",
 
       // Search & Selects
       search: "",
@@ -161,7 +177,9 @@ html {
   height: calc(100% - 64px);
   padding: 0 !important;
   overflow: hidden auto;
-  background: radial-gradient(rgba(50, 163, 173, 0.3), #1f1f39);
+  // background: radial-gradient(#31a2ac4d, #1f1f39);
+  background-image: url("./assets/bg-radial.jpg");
+  background-size: 100% 100%;
 }
 
 // App bar
@@ -170,5 +188,13 @@ html {
   letter-spacing: 0.1667em !important;
   font-size: 18px;
   text-transform: uppercase;
+}
+
+.appbar-select {
+  width: 64px;
+}
+
+.app-tabs {
+  width: fit-content!important;
 }
 </style>

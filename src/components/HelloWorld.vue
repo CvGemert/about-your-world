@@ -1,23 +1,39 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
-        <v-card>
-          {{ sources }}
-        </v-card>
+  <v-container fluid>
+    <v-row>
+      <v-col>
+        <GridCard
+          title="comp.title"
+          toolbarIcon="calendar-clock"
+          toolbarColour="comp.toolbarColour"
+        >
+          <!-- <template slot="detailSelection">
+            <v-select
+              v-if="comp.selectionItems"
+              dense
+              outlined
+              v-model="selections[comp.key]"
+              :items="comp.selectionItems"
+              :label="comp.title"
+            />
+          </template> -->
+          <template slot="body">
+            sss
+          </template>
+        </GridCard>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import GridCard from "./GridCard";
 import reduceFunctions from "../compositions/reduceFunctions";
 
 export default {
   name: "HelloWorld",
   setup() {
     const { reduceSum, reduceProp, reduceMergeSum } = reduceFunctions();
-
     return {
       reduceSum,
       reduceProp,
@@ -29,6 +45,9 @@ export default {
       sources: null,
       selectedIndicator: 103006,
     };
+  },
+  components: {
+    GridCard,
   },
   created() {
     // this.axios
