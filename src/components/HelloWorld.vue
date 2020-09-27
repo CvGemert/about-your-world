@@ -23,7 +23,7 @@ export default {
   created() {
     this.axios
       .get(
-        "http://ec2-54-174-131-205.compute-1.amazonaws.com/API/HDRO_API.php/indicator_id=" +
+        "https://cors-anywhere.herokuapp.com/http://ec2-54-174-131-205.compute-1.amazonaws.com/API/HDRO_API.php/indicator_id=" +
           this.selectedIndicator
       )
       .then((resp) => {
