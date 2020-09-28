@@ -59,8 +59,8 @@
     <!-- ************************************ APP BAR ************************************ -->
     <v-app-bar app clipped-left>
       <!-- Title -->
-      <v-toolbar-title class="app-title">
-        <p>About:</p>
+      <v-toolbar-title class="app-title ml-5">
+        <p class="mb-n2 mt-1">About:</p>
         <h3>Your World</h3>
       </v-toolbar-title>
 
@@ -69,40 +69,42 @@
       <v-spacer />
 
       <!-- Search -->
-      <v-text-field
+      <!-- <v-text-field
         v-model="search"
         append-icon="mdi-magnify"
         label="Search your world"
         hide-details
-      />
+      /> -->
 
       <!-- Spacing -->
       <v-spacer />
 
       <!-- Region select -->
-      <v-select
+      <!-- <v-select
         :items="regionList"
         single-line
         placeholder="Select Region"
         class="mt-5 mr-4 appbar-select"
-      />
+      /> -->
 
       <!-- Country selection -->
-      <v-select
+      <v-autocomplete
         :items="keyedCountries"
         v-model="selectedCountry"
         item-text="value"
         item-value="key"
         label="Select Country"
+        placeholder="All countries"
         hide-details
         outlined
         dense
+        class="appbar-select"
       />
 
       <!-- TABS HEADERS -->
       <v-tabs v-model="tab" icons-and-text right class="app-tabs">
-        <v-tab href="#dashboard-tab">
-          dashboard
+        <v-tab href="#overview-tab">
+          Overview
           <v-icon>mdi-television-guide</v-icon>
         </v-tab>
 
@@ -123,11 +125,12 @@
     <!-- ************************************ MAIN CONTENT ************************************ -->
     <v-main class="content-wrap">
       <v-tabs-items v-model="tab" class="transparent">
-        <v-tab-item id="dashboard-tab">
-          <Dashboard :selectedCountry="selectedCountry" />
+        <v-tab-item id="overview-tab">
+          <Overview :selectedCountry="selectedCountry" />
         </v-tab-item>
         <v-tab-item id="advanced-tab">
           <Advanced />
+          <!-- <HelloWorld /> -->
         </v-tab-item>
       </v-tabs-items>
     </v-main>
@@ -138,18 +141,21 @@
 import { mapState } from "vuex";
 
 import Advanced from "./views/Advanced";
-import Dashboard from "./views/Dashboard";
+import Overview from "./views/Overview";
+
+// import HelloWorld from "./components/HelloWorld";
 
 export default {
   components: {
     Advanced,
-    Dashboard,
+    Overview,
+    // HelloWorld
   },
   data() {
     return {
       // App & Layouts
       rightDrawer: false,
-      tab: "dashboard-tab",
+      tab: "overview-tab",
 
       // Search & Selects
       search: "",
@@ -214,10 +220,11 @@ html {
   letter-spacing: 0.1667em !important;
   font-size: 18px;
   text-transform: uppercase;
+  margin-right: 132px;
 }
 
 .appbar-select {
-  width: 64px;
+  max-width: 320px!important;
 }
 
 .app-tabs {

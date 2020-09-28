@@ -29,6 +29,6 @@ export default {
 }
 
 .glass-card {
-  box-shadow: inset 0 0 100px 10px #ffffff33;
+  box-shadow: inset 0 0 200px 10px #ffffff33;
 }
 </style>

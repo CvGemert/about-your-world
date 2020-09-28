@@ -3,7 +3,7 @@
     :color="active ? 'active' : 'transparent'"
     dark
     flat
-    class="mb-6 py-1"
+    class="mb-8 py-1 pr-2"
     width="320"
   >
     <!-- TOOLBAR -->
@@ -17,10 +17,10 @@
         <v-list-item two-line v-if="active" class="text-start">
           <v-list-item-content>
             <v-list-item-subtitle class="display-1">
-              {{ mainData[0].data[mainData[0].data.length - 1][1] }}
+              <span v-if="this.mainData[0].name === 141706">$</span>{{ (mainData[0].data[mainData[0].data.length - 1][1]).toLocaleString() }}
             </v-list-item-subtitle>
-            <v-list-item-subtitle class="kpi-number">
-              2019
+            <v-list-item-subtitle class="metric-info">
+              {{ metrics[mainData[0].name] }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -31,10 +31,10 @@
         <v-list-item two-line v-if="!active" class="text-start">
           <v-list-item-content>
             <v-list-item-subtitle class="display-1">
-              {{ mainData[0].data[mainData[0].data.length - 1][1] }}
+              <span v-if="this.mainData[0].name === 141706">$</span>{{ (mainData[0].data[mainData[0].data.length - 1][1]).toLocaleString() }}
             </v-list-item-subtitle>
-            <v-list-item-subtitle class="kpi-number">
-              2019
+            <v-list-item-subtitle class="metric-info">
+              {{ metrics[mainData[0].name] }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -44,7 +44,7 @@
         class="mt-2"
         type="area"
         height="60"
-        width="180"
+        width="160"
         :options="chartOptions"
         :series="mainData"
       />
@@ -58,6 +58,13 @@ export default {
   props: ["mainData", "name", "selectedHdi"],
   data() {
     return {
+      metrics: {
+        141706: "GNI p/c in PPP",
+        137506: "HDI score",
+        69206: "Years",
+        186606: "Tonnes",
+        103006: "Years",
+      },
       chartOptions: {
         chart: {
           type: "area",
@@ -107,7 +114,7 @@ export default {
   margin: 0;
   padding: 0;
 
-  & .kpi-number {
+  & .metric-info {
     font-size: 14px !important;
     letter-spacing: 2px;
   }

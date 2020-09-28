@@ -2,25 +2,7 @@
   <v-container fluid>
     <v-row>
       <v-col>
-        <GridCard
-          title="comp.title"
-          toolbarIcon="calendar-clock"
-          toolbarColour="comp.toolbarColour"
-        >
-          <!-- <template slot="detailSelection">
-            <v-select
-              v-if="comp.selectionItems"
-              dense
-              outlined
-              v-model="selections[comp.key]"
-              :items="comp.selectionItems"
-              :label="comp.title"
-            />
-          </template> -->
-          <template slot="body">
-            sss
-          </template>
-        </GridCard>
+        {{sources}}
       </v-col>
     </v-row>
   </v-container>
@@ -43,22 +25,22 @@ export default {
   data() {
     return {
       sources: null,
-      selectedIndicator: 103006,
+      selectedIndicator: 186606,
     };
   },
   components: {
     GridCard,
   },
   created() {
-    // this.axios
-    //   .get(
-    //     "https://cors-anywhere.herokuapp.com/http://ec2-54-174-131-205.compute-1.amazonaws.com/API/HDRO_API.php/indicator_id=" +
-    //       this.selectedIndicator
-    //   )
-    //   .then((resp) => {
-    //     this.sources = [resp.data.indicator_value];
-    //   })
-    //   .finally(() => (this.loading = false));
+    this.axios
+      .get(
+        "https://cors-anywhere.herokuapp.com/http://ec2-54-174-131-205.compute-1.amazonaws.com/API/HDRO_API.php/indicator_id=" +
+          this.selectedIndicator
+      )
+      .then((resp) => {
+        this.sources = [resp.data.indicator_value];
+      })
+      .finally(() => (this.loading = false));
   },
 };
 </script>

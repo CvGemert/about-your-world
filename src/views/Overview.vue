@@ -59,7 +59,7 @@ import GridCard from "../components/GridCard";
 import Indicators from "../components/Indicators";
 
 export default {
-  name: "Home",
+  name: "Basic",
   props: ["selectedCountry"],
   components: {
     ChartTime,
@@ -80,17 +80,21 @@ export default {
       if (this.selectedCountry !== "global") {
         let dataSerie = [];
 
-        Object.entries(this.mainHdi[input][this.selectedCountry]).map(
-          (year) => {
-            if (input === 141706) {
-              dataSerie.push([year[0], parseInt(year[1])]);
-            } else if (input === 137506) {
-              dataSerie.push([year[0], year[1].toFixed(3)]);
-            } else {
-              dataSerie.push([year[0], year[1].toFixed(2)]);
+        if (Object.keys(this.mainHdi[input]).includes(this.selectedCountry)) {
+          Object.entries(this.mainHdi[input][this.selectedCountry]).map(
+            (year) => {
+              if (input === 141706) {
+                dataSerie.push([year[0], parseInt(year[1])]);
+              } else if (input === 137506) {
+                dataSerie.push([year[0], year[1].toFixed(3)]);
+              } else {
+                dataSerie.push([year[0], year[1].toFixed(2)]);
+              }
             }
-          }
-        );
+          );
+        } else {
+          dataSerie.push([]);
+        }
         return [
           {
             name: input,
@@ -99,8 +103,8 @@ export default {
         ];
       } else {
         let dataSerie = [];
-
         let allValues = Object.values(this.mainHdi[input]);
+
         let allYears = [
           ...new Set(allValues.map((x) => Object.keys(x)).flat()),
         ];
