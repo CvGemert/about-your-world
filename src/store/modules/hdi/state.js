@@ -192,16 +192,8 @@ export default {
     187006: "IHDI: Income share held by richest 10 %",
   },
 
-  // hdiSelect: [
-  //   { key: 141706, value: "Income per person" },
-  //   { key: 69206, value: "Life expectancy at birth" },
-  //   { key: 186606, value: "CO2 emissions per person"},
-  //   { key: 103006, value: "Mean years of schooling" },
-  //   { key: 137506, value: "Human Development Index" },
-  // ],
-
   hdiSelect: [
-    { key: 141706, value: "Income per person" },
+    { key: 141706, value: "Income per capita" },
     { key: 69206, value: "Life expectancy at birth" },
     { key: 103006, value: "Mean years of schooling" },
     { key: 140606, value: "Employment rate" },
@@ -214,18 +206,17 @@ export default {
     income: {
       123506: "GDI: Estimated GNI per capita(PPP), female",
       123606: "GDI: Estimated GNI per capita(PPP), male",
-      175706: "Account ownership at a financial institution or with a mobile - money - service provider, female(%)",
+      31706: "Share of seats in parliament(% held by women)",
       175006: "Female share of employment in senior and middle management(%)",
 
     },
     health: {
-      57806: "Adult mortality rate, female(per 1, 000 people)",
-      57906: "Adult mortality rate, male(per 1, 000 people)",
-      112506: "Suicide rate, male(per 100, 000 people)",
-      112606: "Suicide rate, female(per 100, 000 people)",
       120606: "GDI: Life expectancy at birth, female",
       121106: "GDI: Life expectancy at birth, male",
-
+      57806: "Adult mortality rate, female(per 1, 000 people)",
+      57906: "Adult mortality rate, male(per 1, 000 people)",
+      185106: "Age - standarized mortality rate attributed to noncommunicable diseases, female",
+      185206: "Age - standarized mortality rate attributed to noncommunicable diseases, male",
     },
     labour: {
       48706: "Labour force participation rate, female(% ages 15 and older)",
@@ -247,5 +238,5 @@ export default {
       136906: "GDI: Female HDI, Geometric",
       137006: "GDI: Male HDI, Geometric",
     }
-  }
+  },
 }

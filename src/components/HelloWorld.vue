@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       sources: null,
-      selectedIndicator: 137006,
+      selectedIndicator: 31706,
     };
   },
   components: {

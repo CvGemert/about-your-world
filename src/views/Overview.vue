@@ -36,14 +36,17 @@
         <!-- Gender chart -->
         <v-col cols="4">
           <GridCard
-            title="Gender Equality"
+            title="Gender Statistics"
             toolbarIcon="calendar-clock"
             toolbarColour="comp.toolbarColour"
             cardClass="dark-card"
             contentClass="dark-card"
           >
             <template slot="body">
-              <ChartGender />
+              <ChartGender
+                :selectedHdi="selectedHdi"
+                :selectedCountry="selectedCountry"
+              />
             </template>
           </GridCard>
         </v-col>
@@ -99,6 +102,7 @@ export default {
   },
   methods: {
     filterHdi(input) {
+      // SPECIFIC COUNTRY
       if (this.selectedCountry !== "global") {
         let dataSerie = [];
 
@@ -125,7 +129,10 @@ export default {
             data: dataSerie,
           },
         ];
-      } else {
+      }
+
+      // ALL COUNTRIES
+      else {
         let dataSerie = [];
         let allValues = Object.values(this.mainHdi[input]);
 

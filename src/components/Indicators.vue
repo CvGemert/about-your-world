@@ -76,6 +76,7 @@
 
 <script>
 import { mapState } from "vuex";
+
 export default {
   props: ["mainData", "name", "selectedHdi"],
   data() {
