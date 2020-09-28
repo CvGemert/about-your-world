@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       sources: null,
-      selectedIndicator: 186606,
+      selectedIndicator: 137006,
     };
   },
   components: {
@@ -38,7 +38,16 @@ export default {
           this.selectedIndicator
       )
       .then((resp) => {
-        this.sources = [resp.data.indicator_value];
+        let output = {};
+
+        Object.entries(resp.data.indicator_value).map(country => {
+          let filtered = {}
+
+          output[country[0]] = country[1][this.selectedIndicator]
+        })
+
+
+        this.sources = {[this.selectedIndicator]: output}
       })
       .finally(() => (this.loading = false));
   },

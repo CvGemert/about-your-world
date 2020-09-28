@@ -3,7 +3,7 @@
     :color="active ? 'active' : 'transparent'"
     dark
     flat
-    class="mb-8 py-1 pr-2"
+    class="mb-7 py-1 pr-2"
     width="320"
   >
     <!-- TOOLBAR -->
@@ -13,32 +13,54 @@
 
     <!-- ACTIVE -->
     <div class="d-flex">
-      <v-scroll-y-transition hide-on-leave>
+      <v-slide-y-transition hide-on-leave>
         <v-list-item two-line v-if="active" class="text-start">
           <v-list-item-content>
-            <v-list-item-subtitle class="display-1">
-              <span v-if="this.mainData[0].name === 141706">$</span>{{ (mainData[0].data[mainData[0].data.length - 1][1]).toLocaleString() }}
+            <v-list-item-subtitle
+              class="display-1"
+              v-if="mainData[0].data[0].length > 0"
+            >
+              <span v-if="this.mainData[0].name === 141706">$</span
+              >{{
+                mainData[0].data[
+                  mainData[0].data.length - 1
+                ][1].toLocaleString()
+              }}
+            </v-list-item-subtitle>
+            <v-list-item-subtitle class="display-1" v-else>
+              N/A
             </v-list-item-subtitle>
             <v-list-item-subtitle class="metric-info">
               {{ metrics[mainData[0].name] }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-      </v-scroll-y-transition>
+      </v-slide-y-transition>
 
       <!-- NOT ACTIVE -->
-      <v-scroll-y-transition hide-on-leave>
+      <v-slide-y-transition hide-on-leave>
         <v-list-item two-line v-if="!active" class="text-start">
           <v-list-item-content>
-            <v-list-item-subtitle class="display-1">
-              <span v-if="this.mainData[0].name === 141706">$</span>{{ (mainData[0].data[mainData[0].data.length - 1][1]).toLocaleString() }}
+            <v-list-item-subtitle
+              class="display-1"
+              v-if="mainData[0].data[0].length > 0"
+            >
+              <span v-if="this.mainData[0].name === 141706">$</span
+              >{{
+                mainData[0].data[
+                  mainData[0].data.length - 1
+                ][1].toLocaleString()
+              }}
+            </v-list-item-subtitle>
+            <v-list-item-subtitle class="display-1" v-else>
+              N/A
             </v-list-item-subtitle>
             <v-list-item-subtitle class="metric-info">
               {{ metrics[mainData[0].name] }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-      </v-scroll-y-transition>
+      </v-slide-y-transition>
 
       <apexchart
         class="mt-2"
@@ -60,10 +82,10 @@ export default {
     return {
       metrics: {
         141706: "GNI p/c in PPP",
-        137506: "HDI score",
-        69206: "Years",
-        186606: "Tonnes",
         103006: "Years",
+        140606: "Percent",
+        69206: "Years",
+        137506: "HDI score",
       },
       chartOptions: {
         chart: {

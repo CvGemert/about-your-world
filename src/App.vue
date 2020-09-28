@@ -126,11 +126,11 @@
     <v-main class="content-wrap">
       <v-tabs-items v-model="tab" class="transparent">
         <v-tab-item id="overview-tab">
+          <!-- <HelloWorld /> -->
           <Overview :selectedCountry="selectedCountry" />
         </v-tab-item>
         <v-tab-item id="advanced-tab">
           <Advanced />
-          <!-- <HelloWorld /> -->
         </v-tab-item>
       </v-tabs-items>
     </v-main>
@@ -163,7 +163,7 @@ export default {
       selectedCountry: "global",
 
       // Loading States
-      loading: true,
+      // loading: true,
     };
   },
   computed: {

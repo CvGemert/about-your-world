@@ -10,11 +10,11 @@
 <script>
 export default {
   name: "ChartTime",
-  props: ['mainData'],
+  props: ["mainData"],
   computed: {
     series() {
-      return this.mainData
-    }
+      return this.mainData;
+    },
   },
   data() {
     return {
@@ -46,10 +46,9 @@ export default {
         xaxis: {
           type: "datetime",
           min: undefined,
-          tickAmount: 12,
         },
         yaxis: {
-          show: true,
+          show: false,
           logarithmic: false,
         },
         tooltip: {

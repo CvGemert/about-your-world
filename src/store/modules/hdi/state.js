@@ -192,11 +192,60 @@ export default {
     187006: "IHDI: Income share held by richest 10 %",
   },
 
+  // hdiSelect: [
+  //   { key: 141706, value: "Income per person" },
+  //   { key: 69206, value: "Life expectancy at birth" },
+  //   { key: 186606, value: "CO2 emissions per person"},
+  //   { key: 103006, value: "Mean years of schooling" },
+  //   { key: 137506, value: "Human Development Index" },
+  // ],
+
   hdiSelect: [
     { key: 141706, value: "Income per person" },
     { key: 69206, value: "Life expectancy at birth" },
-    { key: 186606, value: "CO2 emissions per person"},
     { key: 103006, value: "Mean years of schooling" },
+    { key: 140606, value: "Employment rate" },
     { key: 137506, value: "Human Development Index" },
-  ]
+  ],
+  gender: {
+    ratio: {
+      49006: "Sex ratio at birth(male to female births)",
+    },
+    income: {
+      123506: "GDI: Estimated GNI per capita(PPP), female",
+      123606: "GDI: Estimated GNI per capita(PPP), male",
+      175706: "Account ownership at a financial institution or with a mobile - money - service provider, female(%)",
+      175006: "Female share of employment in senior and middle management(%)",
+
+    },
+    health: {
+      57806: "Adult mortality rate, female(per 1, 000 people)",
+      57906: "Adult mortality rate, male(per 1, 000 people)",
+      112506: "Suicide rate, male(per 100, 000 people)",
+      112606: "Suicide rate, female(per 100, 000 people)",
+      120606: "GDI: Life expectancy at birth, female",
+      121106: "GDI: Life expectancy at birth, male",
+
+    },
+    labour: {
+      48706: "Labour force participation rate, female(% ages 15 and older)",
+      48806: "Labour force participation rate, male(% ages 15 and older)",
+      169706: "GD: Unemployment rate(total), female to male ratio",
+      169806: "GD: Youth unemployment rate, female to male ratio",
+
+    },
+    education: {
+      23906: "Population with at least some secondary education, female(% ages 25 and older)",
+      24006: "Population with at least some secondary education, male(% ages 25 and older)",
+      24106: "GDI: Mean years of schooling(females aged 25 years and above)",
+      24206: "GDI: Mean years of schooling(males aged 25 years and above)",
+      123306: "GDI: Expected years of schooling, females",
+      123406: "GDI: Expected years of schooling, males",
+
+    },
+    hdi: {
+      136906: "GDI: Female HDI, Geometric",
+      137006: "GDI: Male HDI, Geometric",
+    }
+  }
 }
