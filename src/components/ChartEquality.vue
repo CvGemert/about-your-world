@@ -24,12 +24,16 @@
 
 ************************************************************************ -->
 
-  <apexchart
+  <span>
+    <p v-show="noData" class="text-center">No data for this selection</p>
+    <apexchart
       type="radialBar"
       height="280"
       :options="chartOptions"
       :series="equalScore"
+      v-show="!noData"
     />
+  </span>
 
   <!-- <span>
     {{ equalScore }}
@@ -53,7 +57,7 @@ export default {
   props: ["selectedHdi", "selectedCountry"],
   data() {
     return {
-      series: [75],
+      noData: false,
     };
   },
 
@@ -84,11 +88,20 @@ export default {
     },
 
     equalScore() {
+      this.noData = false;
       let input = this.inequality[this.switchIndicator];
 
       // SPECIFIC COUNTRY
       if (this.selectedCountry !== "global") {
-        return [parseFloat(this.singleCountry(input[this.selectedCountry]).toFixed(1))];
+        if (Object.keys(input).includes(this.selectedCountry)) {
+          return [
+            parseFloat(
+              this.singleCountry(input[this.selectedCountry]).toFixed(1)
+            ),
+          ];
+        } else {
+          this.noData = true;
+        }
       }
 
       // ALL COUNTRIES
@@ -99,7 +112,11 @@ export default {
           countryCombi.push(this.singleCountry(input[country]));
         });
 
-        return [parseFloat(this.reduceSum(countryCombi) / countryCombi.length).toFixed(1)];
+        return [
+          parseFloat(
+            this.reduceSum(countryCombi) / countryCombi.length
+          ).toFixed(1),
+        ];
       }
     },
 

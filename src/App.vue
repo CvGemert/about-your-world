@@ -1,20 +1,7 @@
 <template>
   <v-app>
-    <!-- ************************************ SIDE DRAWERS ************************************ -->
-
-    <!-- Drawer left -->
-    <!-- <v-navigation-drawer app permanent clipped mini-variant>
-      Placeholder
-    </v-navigation-drawer> -->
-
-    <!-- Drawer right -->
-    <v-navigation-drawer
-      v-model="rightDrawer"
-      width="475"
-      fixed
-      right
-      temporary
-    >
+    <!-- ************************************ SIDE DRAWER ************************************ -->
+    <v-navigation-drawer v-model="rightDrawer" fixed right temporary>
       <v-card>
         <v-toolbar>
           <v-app-bar-nav-icon @click="rightDrawer = !rightDrawer" />
@@ -149,13 +136,13 @@ export default {
   components: {
     Advanced,
     Overview,
-    HelloWorld
+    HelloWorld,
   },
   data() {
     return {
       // App & Layouts
       rightDrawer: false,
-      tab: "overview-tab",
+      tab: "advanced-tab",
 
       // Search & Selects
       search: "",
@@ -224,7 +211,7 @@ html {
 }
 
 .appbar-select {
-  max-width: 320px!important;
+  max-width: 320px !important;
 }
 
 .app-tabs {
