@@ -6,21 +6,21 @@
         <apexchart
           type="bar"
           height="24px"
-          :options="
-            chartOptions(
-              serie.content[0].data[0],
-              serie.content[1].data[0],
-              index,
-              serie.title
-            )
-          "
-          :series="serie.content"
+          :options="chartOptions()"
+          :series="getMinMax(serie)"
         />
+
+        <!-- {{ serie.content }} -->
+        <!-- {{serie.content[0].data[0]}}
+            {{serie.content[1].data[0]}} -->
+
+        <!-- <p>{{ getMinMax(serie) }}</p> -->
+
         <span class="caption float-left ml-1">
-        {{numFormat(serie.content[0].data[0], index)}}
+          {{ numFormat(serie.content[0].data[0], index) }}
         </span>
         <span class="caption float-right">
-        {{numFormat(serie.content[1].data[0], index)}}
+          {{ numFormat(serie.content[1].data[0], index) }}
         </span>
       </v-col>
     </v-row>
@@ -296,7 +296,22 @@ export default {
       }
     },
 
-    chartOptions(x, y, index, title) {
+    getMinMax(serie) {
+      let femaleRaw = Math.abs(serie.content[0].data[0]);
+      let maleRaw = Math.abs(serie.content[1].data[0]);
+
+      let total = femaleRaw + maleRaw;
+
+      let female = Math.round((femaleRaw / total) * 100);
+      let male = Math.round((maleRaw / total) * 100);
+
+      return [
+        { name: "Female", data: [-female] },
+        { name: "Male", data: [male] },
+      ];
+    },
+
+    chartOptions() {
       return {
         legend: {
           show: false,
@@ -350,11 +365,8 @@ export default {
         yaxis: {
           // reversed: true,
           show: false,
-          min: -(Math.ceil(Math.abs(x)) + y),
-          max: Math.ceil(Math.abs(x)) + y,
-          title: {
-            // text: 'Age',
-          },
+          min: -100,
+          max: 100,
         },
         tooltip: {
           enabled: false,

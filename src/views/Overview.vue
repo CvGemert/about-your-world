@@ -19,7 +19,7 @@
     <span class="stats-wrapper">
       <!-- Time chart -->
       <v-row>
-        <!-- <v-col cols="8">
+        <v-col cols="8">
           <GridCard
             title="comp.title"
             toolbarIcon="calendar-clock"
@@ -31,10 +31,10 @@
               <ChartTime :mainData="filterHdi(selectedHdi)" />
             </template>
           </GridCard>
-        </v-col> -->
+        </v-col>
 
         <!-- Gender chart -->
-        <v-col cols="12">
+        <v-col cols="4">
           <GridCard
             title="Gender Statistics"
             toolbarIcon="calendar-clock"
