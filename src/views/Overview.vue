@@ -63,7 +63,10 @@
             contentClass="glass-card"
           >
             <template slot="body">
-              <TableRanking />
+              <TableRanking
+                :selectedHdi="selectedHdi"
+                :selectedCountry="selectedCountry"
+              />
             </template>
           </GridCard>
         </v-col>

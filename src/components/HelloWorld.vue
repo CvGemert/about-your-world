@@ -26,7 +26,7 @@ export default {
     return {
       loading: true,
       sources: null,
-      selectedIndicator: 43006,
+      selectedIndicator: 80906,
     };
   },
   components: {
@@ -41,14 +41,16 @@ export default {
       .then((resp) => {
         let output = {};
 
-        Object.entries(resp.data.indicator_value).map(country => {
-          let filtered = {}
+        // Object.entries(resp.data.indicator_value).map(country => {
+        //   let filtered = {}
 
-          output[country[0]] = country[1][this.selectedIndicator]
-        })
+        //   output[country[0]] = country[1][this.selectedIndicator]
+        // })
 
 
-        this.sources = {[this.selectedIndicator]: output}
+        this.sources = resp
+        
+        //  this.sources = {[this.selectedIndicator]: output}
       })
       .finally(() => (this.loading = false));
   },
