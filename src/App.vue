@@ -143,13 +143,13 @@ import { mapState } from "vuex";
 import Advanced from "./views/Advanced";
 import Overview from "./views/Overview";
 
-// import HelloWorld from "./components/HelloWorld";
+import HelloWorld from "./components/HelloWorld";
 
 export default {
   components: {
     Advanced,
     Overview,
-    // HelloWorld
+    HelloWorld
   },
   data() {
     return {

@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col>
+      <v-col v-if="!loading">
         {{sources}}
       </v-col>
     </v-row>
@@ -24,8 +24,9 @@ export default {
   },
   data() {
     return {
+      loading: true,
       sources: null,
-      selectedIndicator: 31706,
+      selectedIndicator: 43006,
     };
   },
   components: {

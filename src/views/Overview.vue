@@ -21,7 +21,7 @@
       <v-row>
         <v-col cols="8">
           <GridCard
-            title="comp.title"
+            title="Time Series"
             toolbarIcon="calendar-clock"
             toolbarColour="comp.toolbarColour"
             cardClass="transparent-card"
@@ -51,6 +51,41 @@
           </GridCard>
         </v-col>
       </v-row>
+
+      <!-- Ranking table -->
+      <v-row>
+        <v-col cols="8">
+          <GridCard
+            title="Rank"
+            toolbarIcon="calendar-clock"
+            toolbarColour="comp.toolbarColour"
+            cardClass="transparent-card"
+            contentClass="glass-card"
+          >
+            <template slot="body">
+              <TableRanking />
+            </template>
+          </GridCard>
+        </v-col>
+
+        <!-- Inequality chart -->
+        <v-col cols="4">
+          <GridCard
+            title="Inequality adjustment"
+            toolbarIcon="calendar-clock"
+            toolbarColour="comp.toolbarColour"
+            cardClass="dark-card"
+            contentClass="dark-card"
+          >
+            <template slot="body">
+              <ChartEquality
+                :selectedHdi="selectedHdi"
+                :selectedCountry="selectedCountry"
+              />
+            </template>
+          </GridCard>
+        </v-col>
+      </v-row>
     </span>
   </v-container>
 </template>
@@ -58,21 +93,25 @@
 <script>
 import { mapState } from "vuex";
 
-// import ApexRadial from "../components/ApexRadial";
+import ChartEquality from "../components/ChartEquality";
 import ChartGender from "../components/ChartGender";
 import ChartTime from "../components/ChartTime";
 import GridCard from "../components/GridCard";
+import GridGenerator from "../components/GridGenerator";
 import Indicators from "../components/Indicators";
+import TableRanking from "../components/TableRanking";
 
 export default {
   name: "Overview",
   props: ["selectedCountry"],
   components: {
-    // ApexRadial,
+    ChartEquality,
     ChartGender,
     ChartTime,
     GridCard,
+    GridGenerator,
     Indicators,
+    TableRanking,
   },
   data() {
     return {

@@ -9,6 +9,7 @@ import gLaboutModule from './modules/genderLabour/index'
 import gRatioModule from './modules/genderRatio/index'
 
 import hdiModule from './modules/hdi/index'
+import inequalityModule from './modules/inequality/index'
 import mainHdiModule from './modules/mainHdi/index'
 
 Vue.use(Vuex)
@@ -24,5 +25,6 @@ export default new Vuex.Store({
     gIncomeModule,
     gLaboutModule,
     gRatioModule,
+    inequalityModule
   },
 })

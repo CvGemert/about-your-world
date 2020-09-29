@@ -1,5 +1,5 @@
 <template>
-  <v-card height="100%" :class="cardClass">
+  <v-card class="card-height" :class="cardClass">
     <v-toolbar dense flat dark :class="toolbarColour">
       <v-icon class="mr-6">mdi-{{toolbarIcon}}</v-icon>
       <v-toolbar-title class="overline">{{title}}</v-toolbar-title>
@@ -7,7 +7,7 @@
       <slot name="toolBarBtn" />
     </v-toolbar>
 
-    <v-card-text class="card-overflow" height="100%" :class="contentClass">
+    <v-card-text class="card-overflow" :class="contentClass">
       <slot name="detailSelection" />
       <slot name="body" />
     </v-card-text>
@@ -22,10 +22,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card-height {
+  min-height: 320px;
+  height: calc(50vh - 88px);
+}
 .card-overflow {
+  height: calc(100% - 48px);
   overflow-y: auto;
-  min-height: 400px;
-  max-height: 60vh;
 }
 
 .glass-card {
