@@ -1,10 +1,6 @@
 <template>
   <v-container>
     <v-row v-for="(serie, index) in pairedSeries" :key="'serie' + index">
-      <!-- {{ reduceSeries(switchIndicator[index], index) }} -->
-
-      <!-- {{ serie }} -->
-
       <v-col>
         <span class="overline">{{ serie.title }}</span>
         <apexchart
@@ -47,11 +43,6 @@ export default {
   },
   props: ["selectedHdi", "selectedCountry"],
 
-  data() {
-    return {
-      pairedValues: {},
-    };
-  },
   computed: {
     ...mapState("gEducationModule", ["education"]),
     ...mapState("gHealthModule", ["health"]),
@@ -190,8 +181,8 @@ export default {
           };
           break;
         case 140606:
-          if(allSeries[169706] >= 1) {
-            var totFemEmploy = (allSeries[169706] - 1)
+          if (allSeries[169706] >= 1) {
+            var totFemEmploy = allSeries[169706] - 1;
           }
 
           output.labour = {
@@ -245,75 +236,38 @@ export default {
           break;
       }
 
-      //   141706: [
-      //     {name: "Income per capita", data: [123506, 123606],
-      //     123606: "Income per capita, male",
-      //     175706: "Account ownership, female(%)",
-      //     175006: "Female share of employment in senior and middle management(%)",
-      //   ],
-
       return output;
-
-      // return [
-      //   {
-      //     name: this.allTopics[this.selectedHdi][index],
-      //     data: parseFloat(
-      //       this.reduceSum(allValues) / allValues.length
-      //     ).toFixed(2),
-      //   },
       // ];
     },
   },
   methods: {
-    reduceSeries(input) {
-      let onlyFemale = [175706];
-      let ratioValues = [169806, 169706, 175006, 49006];
+    singleCountry(input, country) {
+      let allValues = [];
 
+      if (Object.keys(input).includes(country)) {
+        allValues = Object.values(input[country]);
+      } else {
+        allValues = [];
+      }
+
+      return this.reduceSum(allValues) / allValues.length;
+    },
+
+    reduceSeries(input) {
       // SPECIFIC COUNTRY
       if (this.selectedCountry !== "global") {
-        let allValues = [];
-
-        if (Object.keys(input).includes(this.selectedCountry)) {
-          allValues = Object.values(input[this.selectedCountry]);
-        } else {
-          allValues = [];
-        }
-
-        return this.reduceSum(allValues) / allValues.length;
+        return this.singleCountry(input, this.selectedCountry);
       }
 
       // ALL COUNTRIES
       else {
-        // let dataSerie = [];
-        // let allValues = Object.values(this.mainHdi[input]);
+        let countryCombi = [];
 
-        // let allYears = [
-        //   ...new Set(allValues.map((x) => Object.keys(x)).flat()),
-        // ];
+        Object.keys(input).map((country) => {
+          countryCombi.push(this.singleCountry(input, country));
+        });
 
-        // allYears.map((year) => {
-        //   let oneYear = Object.values(allValues)
-        //     .filter((elKey) => elKey[year])
-        //     .map((elVal) => elVal[year]);
-
-        //   let unrounded =
-        //     oneYear.reduce((acc, cur) => parseFloat(acc) + parseFloat(cur), 0) /
-        //     oneYear.length;
-
-        //   if (input === 141706) {
-        //     dataSerie.push([year, parseInt(unrounded)]);
-        //   } else if (input === 140606) {
-        //     dataSerie.push([year, (100 - unrounded).toFixed(2)]);
-        //   } else if (input === 137506) {
-        //     dataSerie.push([year, unrounded.toFixed(3)]);
-        //   } else {
-        //     dataSerie.push([year, unrounded.toFixed(2)]);
-        //   }
-        // });
-
-        // return [{ name: input, data: dataSerie }];
-
-        return "global";
+        return this.reduceSum(countryCombi) / countryCombi.length;
       }
     },
     numFormat(val, index) {
@@ -332,13 +286,13 @@ export default {
         case "mortality":
           return Math.abs((val / 10).toFixed(1)) + "%";
         case "ageMortality":
-          return Math.abs(parseInt(val)) + " / 100,000"
+          return Math.abs(parseInt(val)) + " / 100,000";
         case "unemployment":
         case "unemploymentYouth":
         case "hdi":
-          return Math.abs(val).toFixed(3)
+          return Math.abs(val).toFixed(3);
         default:
-          return val.toFixed(3)
+          return val.toFixed(3);
       }
     },
 
@@ -391,13 +345,13 @@ export default {
           // },
         },
         xaxis: {
-          show: false
+          show: false,
         },
         yaxis: {
           // reversed: true,
           show: false,
           min: -(Math.ceil(Math.abs(x)) + y),
-          max: (Math.ceil(Math.abs(x)) + y),
+          max: Math.ceil(Math.abs(x)) + y,
           title: {
             // text: 'Age',
           },
