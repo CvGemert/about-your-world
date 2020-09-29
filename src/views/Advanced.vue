@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-select :items="Object.keys(indicators)" v-model="selectedIndicator"/>
+    <v-select :items="Object.keys(indicators)" v-model="selectedIndicator" />
     {{ sources }}
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-      loading: true,
+      loading: false,
       sources: null,
       selectedIndicator: null,
     };
@@ -34,32 +34,45 @@ export default {
   watch: {
     selectedIndicator(val) {
       this.getData(val);
-    }
+    },
   },
   computed: {
-    ...mapState("hdiModule", ["indicators"]),
+    ...mapState("hdiModule", ["country_codes", "indicators", "preloaded"]),
+    ...mapState("mainHdiModule", ["mainHdi"]),
+    ...mapState("gEducationModule", ["education"]),
+    ...mapState("gHealthModule", ["health"]),
+    ...mapState("gIncomeModule", ["income"]),
+    ...mapState("gLaboutModule", ["labour"]),
+    ...mapState("gHdiModule", ["hdi"]),
+    ...mapState("gRatioModule", ["ratio"]),
+    ...mapState("inequalityModule", ["inequality"]),
   },
   methods: {
     getData(input) {
-      this.axios
-        .get(
-          "https://cors-anywhere.herokuapp.com/http://ec2-54-174-131-205.compute-1.amazonaws.com/API/HDRO_API.php/indicator_id=" +
-            input
-        )
-        .then((resp) => {
-          let output = {};
+      if (Object.keys(this.preloaded).includes(input)) {
+        this.sources = this[this.preloaded[input]];
+      } else {
+        (this.loading = true),
+          this.axios
+            .get(
+              "https://cors-anywhere.herokuapp.com/http://ec2-54-174-131-205.compute-1.amazonaws.com/API/HDRO_API.php/indicator_id=" +
+                input
+            )
+            .then((resp) => {
+              let output = {};
 
-          // Object.entries(resp.data.indicator_value).map(country => {
-          //   let filtered = {}
+              // Object.entries(resp.data.indicator_value).map(country => {
+              //   let filtered = {}
 
-          //   output[country[0]] = country[1][this.selectedIndicator]
-          // })
+              //   output[country[0]] = country[1][this.selectedIndicator]
+              // })
 
-          this.sources = resp;
+              this.sources = resp;
 
-          //  this.sources = {[this.selectedIndicator]: output}
-        })
-        .finally(() => (this.loading = false));
+              //  this.sources = {[this.selectedIndicator]: output}
+            })
+            .finally(() => (this.loading = false));
+      }
     },
   },
 };
