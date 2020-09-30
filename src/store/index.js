@@ -15,7 +15,6 @@ import mainHdiModule from './modules/mainHdi/index'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  namespaced: true,
   modules: {
     hdiModule,
     mainHdiModule,
@@ -27,4 +26,18 @@ export default new Vuex.Store({
     gRatioModule,
     inequalityModule
   },
+
+  state: {
+    selectedCountry: 'global',
+    count: 4
+  },
+  mutations: {
+    increment(state) {
+      state.count++
+    },
+
+    updateCountry(state, payload) {
+      state.selectedCountry = payload
+    },
+  }
 })

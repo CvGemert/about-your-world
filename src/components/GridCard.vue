@@ -23,11 +23,12 @@ export default {
 
 <style lang="scss" scoped>
 .card-height {
-  min-height: 320px;
-  height: calc(50vh - 88px);
+  // min-height: 340px;
+  height: 100%;
 }
 .card-overflow {
   height: calc(100% - 48px);
+  width: 100%;
   overflow-y: auto;
 }
 

@@ -3,7 +3,7 @@
     :color="active ? 'active' : 'transparent'"
     dark
     flat
-    class="mb-7 py-1 pr-2"
+    class="py-1 pr-1"
     width="320"
   >
     <!-- TOOLBAR -->
@@ -66,7 +66,7 @@
         class="mt-2"
         type="area"
         height="60"
-        width="160"
+        width="144"
         :options="chartOptions"
         :series="mainData"
       />

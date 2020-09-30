@@ -28,7 +28,6 @@
     <p v-show="noData" class="text-center">No data for this selection</p>
     <apexchart
       type="radialBar"
-      height="280"
       :options="chartOptions"
       :series="equalScore"
       v-show="!noData"

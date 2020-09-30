@@ -1,8 +1,8 @@
 <template>
   <div id="overview-grid">
     <!-- INDICATOR SELECTION -->
-    <div class="overview-grid-item py-12 pl-10">
-      <v-item-group mandatory class="indicator-flex-wrap">
+    <div class="overview-grid-item overview-1">
+      <!-- <v-item-group mandatory class="indicator-flex-wrap">
         <v-item v-for="(hdi, index) in hdiSelect" :key="'hdi' + index" dense>
           <span @click="selectedHdi = hdi.key" class="pointer">
             <Indicators
@@ -12,81 +12,77 @@
             />
           </span>
         </v-item>
-      </v-item-group>
+      </v-item-group> -->
     </div>
 
     <!-- MAIN STATS VIEW -->
-    <div class="overview-grid-item py-12 pr-10">
-      <div id="main-stats-grid">
-        <!-- Time chart -->
-        <div class="grid-timeline">
-          <GridCard
-            title="Time Series"
-            toolbarIcon="calendar-clock"
-            toolbarColour="comp.toolbarColour"
-            cardClass="transparent-card"
-            contentClass="glass-card"
-          >
-            <template slot="body">
-              <ChartTime :mainData="filterHdi(selectedHdi)" />
-            </template>
-          </GridCard>
-        </div>
+    <!-- Time chart -->
+    <div class="overview-2">
+      <!-- <GridCard
+        title="Time Series"
+        toolbarIcon="calendar-clock"
+        toolbarColour="comp.toolbarColour"
+        cardClass="transparent-card"
+        contentClass="glass-card"
+      >
+        <template slot="body"> -->
+          <ChartTime :mainData="filterHdi(selectedHdi)" />
+        <!-- </template>
+      </GridCard> -->
+    </div>
 
-        <!-- Gender chart -->
-        <div class="grid-genders">
-          <GridCard
-            title="Gender Statistics"
-            toolbarIcon="calendar-clock"
-            toolbarColour="comp.toolbarColour"
-            cardClass="dark-card"
-            contentClass="dark-card"
-          >
-            <template slot="body">
-              <ChartGender
-                :selectedHdi="selectedHdi"
-                :selectedCountry="selectedCountry"
-              />
-            </template>
-          </GridCard>
-        </div>
+    <!-- Gender chart -->
+    <div class="overview-grid-item overview-3">
+      <!-- <GridCard
+        title="Gender Statistics"
+        toolbarIcon="calendar-clock"
+        toolbarColour="comp.toolbarColour"
+        cardClass="dark-card"
+        contentClass="dark-card"
+      >
+        <template slot="body"> -->
+          <ChartGender
+            :selectedHdi="selectedHdi"
+            :selectedCountry="selectedCountry"
+          />
+        <!-- </template>
+      </GridCard> -->
+    </div>
 
-        <!-- Ranking table -->
-        <div class="grid-rankings">
-          <GridCard
-            title="Rank"
-            toolbarIcon="calendar-clock"
-            toolbarColour="comp.toolbarColour"
-            cardClass="transparent-card"
-            contentClass="glass-card"
-          >
-            <template slot="body">
-              <TableRanking
-                :selectedHdi="selectedHdi"
-                :selectedCountry="selectedCountry"
-              />
-            </template>
-          </GridCard>
-        </div>
+    <!-- Ranking table -->
+    <div class="overview-grid-item overview-4">
+      <!-- <GridCard
+        title="Rank"
+        toolbarIcon="calendar-clock"
+        toolbarColour="comp.toolbarColour"
+        cardClass="transparent-card"
+        contentClass="glass-card"
+      >
+        <template slot="body"> -->
+          <TableRanking
+            :selectedHdi="selectedHdi"
+            :selectedCountry="selectedCountry"
+          />
+        <!-- </template>
+      </GridCard> -->
+    </div>
 
-        <!-- Inequality chart -->
-        <div class="grid-equality">
-          <GridCard
-            title="Inequality adjustment"
-            toolbarIcon="calendar-clock"
-            toolbarColour="comp.toolbarColour"
-            cardClass="dark-card"
-            contentClass="dark-card"
-          >
-            <template slot="body">
-              <ChartEquality
-                :selectedHdi="selectedHdi"
-                :selectedCountry="selectedCountry"
-              />
-            </template>
-          </GridCard>
-        </div>
-      </div>
+    <!-- Inequality chart -->
+    <div class="overview-grid-item overview-5">
+      <!-- <GridCard
+        title="Inequality adjustment"
+        toolbarIcon="calendar-clock"
+        toolbarColour="comp.toolbarColour"
+        cardClass="dark-card"
+        contentClass="dark-card"
+      >
+        <template slot="body"> -->
+          <ChartEquality
+            :selectedHdi="selectedHdi"
+            :selectedCountry="selectedCountry"
+          />
+        <!-- </template>
+      </GridCard> -->
     </div>
   </div>
 </template>
@@ -209,24 +205,6 @@ export default {
 </script>
 
 <style lang="scss">
-#overview-grid {
-  display: grid;
-  grid-template-rows: 100%;
-  grid-template-columns: 368px auto;
-  grid-column-gap: 40px;
-
-  // position: absolute;
-  // bottom: 0;
-  height: calc(100vh - 64px);
-  width: 100vw;
-}
-
-.overview-grid-item {
-  height: calc(100% - 0px);
-  width: 100%;
-  overflow: hidden auto;
-}
-
 .indicator-flex-wrap {
   height: 100%;
   display: flex;
@@ -234,60 +212,51 @@ export default {
   justify-content: space-between;
 }
 
-#main-stats-grid {
+.overview-grid-item {
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  margin: 20px;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+#overview-grid {
+  height: 100%;
+  width: 100vw;
+  padding: 32px;
   display: grid;
-  grid-template-columns: calc(100% - 320px) 320px;
-  grid-template-rows: 440px 360px;
+  grid-template-columns: 320px 0.75fr 0.25fr;
+  grid-template-rows: 0.6fr 0.4fr;
   grid-template-areas:
-    "timeline genders"
-    "rankings equality";
+    "overview-1 overview-2 overview-3"
+    "overview-1 overview-4 overview-5";
 }
-.grid-timeline {
-  grid-area: timeline;
+.overview-1 {
+  grid-area: overview-1;
 }
-.grid-genders {
-  grid-area: genders;
+.overview-2 {
+  grid-area: overview-2;
 }
-.grid-rankings {
-  grid-area: rankings;
+.overview-3 {
+  grid-area: overview-3;
 }
-.grid-equality {
-  grid-area: equality;
+.overview-4 {
+  grid-area: overview-4;
 }
-
-.grid-timeline,
-.grid-genders {
-  padding-bottom: 40px;
+.overview-5 {
+  grid-area: overview-5;
 }
 
-.grid-timeline,
-.grid-rankings {
-  margin-right: 40px;
-}
-
-@media (max-width: 1263px) {
-  #main-stats-grid {
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 440px 360px 360px;
+@media (max-width: 1024px) {
+  #overview-grid {
+    grid-template-columns: 320px 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas:
-      "timeline timeline"
-      "equality genders"
-      "rankings rankings";
+      "overview-1 overview-2 overview-2"
+      "overview-1 overview-3 overview-5"
+      "overview-1 overview-4 overview-4";
   }
-
-  .grid-timeline,
-  .grid-rankings {
-    margin-right: 0px;
-  }
-
-  .grid-genders {
-    padding-left: 20px;
-  padding-bottom: 0;
-  }
-  .grid-equality {
-    padding-right: 20px;
-  }
-
-  .grid-rankings {padding-top: 40px}
 }
 </style>

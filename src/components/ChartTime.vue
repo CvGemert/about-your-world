@@ -22,14 +22,7 @@ export default {
         legend: {
           show: false,
         },
-        colors: [
-          "#2E93fAbb",
-          "#A300D6",
-          "#abe5a1",
-          "#d62629",
-          "#973c5d",
-          "#00B1F2",
-        ],
+        // colors: [ "#2ac8e8", "#00B1F2", ],
         chart: {
           toolbar: {
             show: false,
@@ -40,12 +33,8 @@ export default {
         dataLabels: {
           enabled: false,
         },
-        stroke: {
-          curve: "smooth",
-        },
         xaxis: {
           type: "datetime",
-          min: undefined,
         },
         yaxis: {
           show: false,
@@ -54,12 +43,6 @@ export default {
         tooltip: {
           theme: "dark",
           shared: true,
-          // fixed: {
-          //   enabled: true,
-          //   position: 'topRight',
-          //   offsetX: 0,
-          //   offsetY: 0,
-          // },
           x: {
             show: true,
             format: "yyyy",
@@ -72,18 +55,37 @@ export default {
             },
           },
         },
+        stroke: {
+          curve: "smooth",
+          width: 1,
+        },
         fill: {
           type: "gradient",
           gradient: {
-            // gradientToColors: ['#4a569d', '#4a569d', '#4a569d', '#4a569d', '#4a569d', '#4a569d'],
+            gradientToColors: ["#973c5d", "#d62629"],
             shadeIntensity: 1,
             opacityFrom: 0.7,
-            opacityTo: 0.1,
-            stops: [0, 90, 100],
+            opacityTo: 0.3,
+            stops: [0, 100],
           },
         },
+        // fill: {
+        //   type: "gradient",
+        //   gradient: {
+        //     shade: "dark",
+        //     gradientToColors: ["#FDD835"],
+        //     shadeIntensity: 1,
+        //     opacityFrom: 1,
+        //     opacityTo: 1,
+        //     stops: [0, 100, 100, 100],
+        //   },
+        // },
       },
     };
   },
 };
 </script>
+
+<style lang="scss">
+// .apexcharts-data-labels{ display: contents !important; }
+</style>
