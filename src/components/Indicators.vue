@@ -1,6 +1,6 @@
 <template>
   <v-card
-    :color="active ? 'active' : 'transparent'"
+    :color="active ? 'active' : 'non-active'"
     dark
     flat
     class="py-1 pr-1"
@@ -149,5 +149,10 @@ export default {
 
 .active {
   background: linear-gradient(to top right, #dc2424, #4a569d);
+}
+
+.non-active {
+
+  background: #cccccc11!important;
 }
 </style>

@@ -1,18 +1,19 @@
 <template>
   <span>
-    showSelected {{ showSelected }}
+    <!-- showSelected {{ showSelected }} -->
     <v-data-table
       :items="tableData"
       :headers="headers"
       :items-per-page="300"
       :sort-by="selectedsort"
+      height="320px"
       must-sort
       sort-desc
       dense
-      fixed
+      fixed-header
       hide-default-footer
       class="campaign-table-wrap"
-      mobile-breakpoint="md"
+      mobile-breakpoint="sm"
       @click:row="rowSelected"
     >
       <!-- Income -->
@@ -112,10 +113,10 @@ export default {
       return [
         { text: "country", value: "country", width: "160px" },
         { text: "income", value: "141706", width: "96px" },
-        { text: "life span", value: "69206", width: "96px" },
-        { text: "schooling", value: "103006", width: "96px" },
-        { text: "employment", value: "140606", width: "96px" },
-        { text: "hdi index", value: "137506", width: "96px" },
+        { text: "life", value: "69206", width: "96px" },
+        { text: "school", value: "103006", width: "96px" },
+        { text: "labour", value: "140606", width: "96px" },
+        { text: "hdi", value: "137506", width: "96px" },
       ];
     },
   },
@@ -138,6 +139,22 @@ export default {
 // Vuetify overwrites
 .campaign-table-wrap {
   background: transparent !important;
+  width: 100% !important;
+  // padding-top: 32px;
+
+  // & thead {
+  //   position: absolute;
+  //   top: 64px;
+  // }
+  // & tbody {
+  //   position: absolute;
+  //   top: 128px;
+  //   height: 160px;
+  //   overflow: hidden auto;
+  // }
+  // & td:first-child {
+  //   width: 156px;
+  // }
 
   & .text-start:not(:first-child) {
     border-bottom: thin solid #aaaaaa66 !important;
@@ -155,6 +172,7 @@ export default {
     background: #cccccc22 !important;
     cursor: pointer;
   }
+
   & th {
     // font-size: 14px!important;
     font-weight: bold;
@@ -163,6 +181,7 @@ export default {
     text-transform: uppercase;
     white-space: nowrap;
     padding: 0;
+    // background: transparent !important;
   }
   & td {
     letter-spacing: 1px;

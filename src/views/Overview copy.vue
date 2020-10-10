@@ -213,7 +213,6 @@ export default {
 }
 
 .overview-grid-item {
-  box-sizing: border-box;
   background-color: rgba(255, 255, 255, 0.2);
   padding: 20px;
   margin: 20px;

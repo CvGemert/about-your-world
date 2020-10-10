@@ -166,19 +166,18 @@ export default {
 <style lang="scss">
 // Custom scrollbars
 * {
-  box-sizing: border-box;
   scrollbar-width: thin;
   scrollbar-color: #dddddd22 #dddddd22;
 }
 *::-webkit-scrollbar {
-  width: 7px;
+  width: 12px;
 }
 *::-webkit-scrollbar-track {
   background: #dddddd22;
 }
 *::-webkit-scrollbar-thumb {
-  background-color: #dddddd22;
-  border-radius: 2px;
+  background-color: #dddddd44;
+  border-radius: 32px;
 }
 
 // General app styles

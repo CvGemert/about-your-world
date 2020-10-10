@@ -1,30 +1,58 @@
 <template>
-  <v-container>
-    <v-row v-for="(serie, index) in pairedSeries" :key="'serie' + index">
-      <v-col>
-        <span class="overline">{{ serie.title }}</span>
-        <apexchart
-          type="bar"
-          height="24px"
-          :options="chartOptions()"
-          :series="getMinMax(serie)"
-        />
-
-        <!-- {{ serie.content }} -->
-        <!-- {{serie.content[0].data[0]}}
-            {{serie.content[1].data[0]}} -->
-
-        <!-- <p>{{ getMinMax(serie) }}</p> -->
-
-        <span class="caption float-left ml-1">
-          {{ numFormat(serie.content[0].data[0], index) }}
+  <v-list three-line class="pt-4">
+    <v-list-item
+      two-line
+      v-for="(serie, index) in pairedSeries"
+      :key="'serie' + index"
+    >
+      <v-list-item-content>
+        <v-list-item-title class="overline">{{
+          serie.title
+        }}</v-list-item-title>
+        <v-list-item-subtitle>
+          <apexchart
+            type="bar"
+            height="16px"
+            :options="chartOptions()"
+            :series="getMinMax(serie)"
+            class="width-correction"
+          />
+        </v-list-item-subtitle>
+        <span>
+          <span class="caption float-left">
+            {{ numFormat(serie.content[0].data[0], index) }}
+          </span>
+          <span class="caption float-right">
+            {{ numFormat(serie.content[1].data[0], index) }}
+          </span>
         </span>
-        <span class="caption float-right">
-          {{ numFormat(serie.content[1].data[0], index) }}
-        </span>
-      </v-col>
-    </v-row>
-  </v-container>
+      </v-list-item-content>
+    </v-list-item>
+  </v-list>
+
+  <!-- <v-list three-line>
+    <template v-for="serie in pairedSeries">
+      <v-list-item :key="serie.title">
+        <v-list-item-content>
+          <v-list-item-title v-html="serie.title" class="overline" />
+          <v-list-item-subtitle>
+            <apexchart
+              type="bar"
+              height="16px"
+              :options="chartOptions()"
+              :series="getMinMax(serie)"
+            />
+          </v-list-item-subtitle>
+          <span class="caption float-left ml-1">
+            {{ numFormat(serie.content[0].data[0], index) }}
+          </span>
+          <span class="caption float-right">
+            {{ numFormat(serie.content[1].data[0], index) }}
+          </span>
+        </v-list-item-content>
+      </v-list-item>
+    </template>
+  </v-list> -->
 </template>
 
 <script>
@@ -196,7 +224,7 @@ export default {
             ],
           };
           output.unemployment = {
-            title: "Gender unemployment ratio (total)",
+            title: "Unemployment ratio (total)",
             content: [
               {
                 name: "Female",
@@ -209,7 +237,7 @@ export default {
             ],
           };
           output.unemploymentYouth = {
-            title: "Gender unemployment ratio (youth)",
+            title: "Unemployment ratio (youth)",
             content: [
               {
                 name: "Female",
@@ -376,3 +404,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+// Apex charts overwrite
+.width-correction {
+  width: 284px;
+}
+</style>

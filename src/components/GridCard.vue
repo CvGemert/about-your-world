@@ -7,7 +7,7 @@
       <slot name="toolBarBtn" />
     </v-toolbar>
 
-    <v-card-text class="card-overflow" :class="contentClass">
+    <v-card-text class="card-overflow py-0" :class="contentClass">
       <slot name="detailSelection" />
       <slot name="body" />
     </v-card-text>

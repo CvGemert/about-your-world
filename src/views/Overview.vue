@@ -217,7 +217,7 @@ export default {
 
   // position: absolute;
   // bottom: 0;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 63px);
   width: 100vw;
 }
 
@@ -236,39 +236,34 @@ export default {
 
 #main-stats-grid {
   display: grid;
-  grid-template-columns: calc(100% - 320px) 320px;
-  grid-template-rows: 440px 360px;
+  height: calc(100vh - 160px);
+  grid-template-columns: calc(100% - 368px) 368px;
+  grid-template-rows: 55% 45%;
   grid-template-areas:
     "timeline genders"
     "rankings equality";
 }
 .grid-timeline {
   grid-area: timeline;
+  padding: 0 20px 20px 0;
 }
 .grid-genders {
   grid-area: genders;
+  padding: 0 0 20px 20px;
 }
 .grid-rankings {
   grid-area: rankings;
+  padding: 20px 20px 40px 0;
 }
 .grid-equality {
   grid-area: equality;
-}
-
-.grid-timeline,
-.grid-genders {
-  padding-bottom: 40px;
-}
-
-.grid-timeline,
-.grid-rankings {
-  margin-right: 40px;
+  padding: 20px 0 0 20px
 }
 
 @media (max-width: 1263px) {
   #main-stats-grid {
     grid-template-columns: 50% 50%;
-    grid-template-rows: 440px 360px 360px;
+    grid-template-rows: 420px 380px 480px;
     grid-template-areas:
       "timeline timeline"
       "equality genders"
@@ -277,12 +272,12 @@ export default {
 
   .grid-timeline,
   .grid-rankings {
-    margin-right: 0px;
+    padding-right: 0px;
   }
 
   .grid-genders {
     padding-left: 20px;
-  padding-bottom: 0;
+    padding-bottom: 0;
   }
   .grid-equality {
     padding-right: 20px;
